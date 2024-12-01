@@ -1,8 +1,11 @@
 package pl.krzysiek;
 
 import java.time.*;
+import java.time.temporal.ChronoField;
 
 /**
+ *
+ * <h1>DateTime API</h1>
  * Class demonstrating different types of time representations in Java.
  * <p>
  * Java provides various ways to work with time, depending on the context and precision requirements.
@@ -36,6 +39,52 @@ import java.time.*;
  *     <li>{@link java.time.ZoneOffset} – Represents a time zone offset from UTC (e.g., +02:00).</li>
  *     <li>{@link java.time.ZoneId} – Represents a time zone ID (e.g., "Europe/Paris").</li>
  * </ul>
+ * Demonstrates common API conventions used in the Java Date-Time API.
+ * <p>
+ * The Date-Time API in Java follows specific conventions to ensure consistency and ease of use.
+ * These conventions are detailed below:
+ * </p>
+ *
+ * <h2>1. Immutability:</h2>
+ * <ul>
+ *     <li>Most classes in the Date-Time API are immutable.</li>
+ *     <li>Operations on these objects do not modify them but instead create new instances,
+ *         similar to how {@link String} behaves in Java.</li>
+ *     <li>Exceptions to this immutability principle may exist but are rare.</li>
+ * </ul>
+ *
+ * <h2>2. Object Creation:</h2>
+ * <p>Instead of using constructors directly, objects in the Date-Time API are created using factory methods.
+ * This approach promotes clarity and ensures flexibility in object instantiation.</p>
+ * <ul>
+ *     <li><b>of(&lt;values&gt;):</b> Creates an object from specific values (e.g., year, month, day).</li>
+ *     <li><b>parse(CharSequence cs):</b> Creates an object from a text representation, such as ISO-8601 strings.</li>
+ *     <li><b>from(&lt;value&gt;):</b> Creates an object from a related type (e.g., converting from {@link java.time.Instant}
+ *         to {@link java.time.LocalDate}).</li>
+ * </ul>
+ *
+ *
+ * <h1>Resume</h1>
+ * <p>
+ *     <h2>Absolute times:</h2>
+ *     <ul>
+ *         <li>ZoneDateTime</li>
+ *         <li>Instant</li>
+ *     </ul>
+ *     <h2>Non-absolute time:</h2>
+ *     <ul>
+ *         <li>LocalDate</li>
+ *         <li>LocalTime</li>
+ *         <li>LocalDateTime</li>
+ *     </ul>
+ *     <h2>Distance</h2>
+ *     <ul>
+ *         <li>Duration - absolute</li>
+ *         <li>Period - context dependent</li>
+ *     </ul>
+ * </p>
+ *
+ *
  */
 
 
@@ -57,5 +106,24 @@ public class Main {
         Period per = Period.of(1, 12, 503);
         System.out.println(per);
         System.out.println(per.normalized());
+
+        LocalDate ld = LocalDate.of(2064, 4, 13);
+        System.out.println(ld);
+        System.out.println(ld.getMonth());
+        ld.plusDays(10);
+        LocalDate ld2 = ld.plusDays(10);
+        System.out.println(ld);
+        System.out.println(ld2);
+
+        System.out.println(ld.with(ChronoField.MONTH_OF_YEAR, 7));
+
+        LocalDate ld3 = LocalDate.parse("2003-04-14");
+        System.out.println(ld3);
+
+        LocalDateTime ldt2 = LocalDateTime.now();
+        LocalDate ld4 = LocalDate.from(ldt2);
+        System.out.println(ld2);
+        System.out.println(ld4);
+
     }
 }
