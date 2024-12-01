@@ -1,4 +1,4 @@
-package pl.krzysiek;
+package pl.krzysiek.data.time;
 
 import java.time.*;
 import java.time.temporal.ChronoField;
