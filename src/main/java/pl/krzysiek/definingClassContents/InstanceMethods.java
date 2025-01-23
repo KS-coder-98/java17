@@ -46,4 +46,54 @@ package pl.krzysiek.definingClassContents;
  * </p>
  */
 public class InstanceMethods {
+
+    //Instance variable
+    private String name;
+
+    public InstanceMethods(String name) {
+        this.name = name;
+    }
+
+    //Non-static method
+    public void greet() {
+        // Implicit use of 'this' to call another instance method
+        printMessage("Hello, " + this.name + "!");
+    }
+
+    //Another non-static method
+    private void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    // Method that explicitly demonstrates the use of 'this'
+    public void demonstrateThisUsage() {
+        System.out.println("Demonstrating 'this':");
+        System.out.println("Name of this object " + this.name); // Explicitly using 'this' to refer to the instance variable
+    }
+
+    public static void main(String[] args) {
+        // Create an instance of the class
+        InstanceMethods instance1 = new InstanceMethods("Alice");
+
+        // 1. Implicit invocation of a non-static method
+        instance1.greet();
+
+        // 2. Explicit invocation using 'this' (inside the method)
+        instance1.demonstrateThisUsage();
+
+        // 3. Invocation using a valid reference to the instance
+        InstanceMethods instance2 = new InstanceMethods("Bob");
+        instance2.greet();
+
+        // 4. Demonstrating chaining instance methods
+        System.out.println("\nChaining methods using 'this':");
+        instance1.chainExample().chainExample().greet(); // Chain calls on the same instance
+    }
+
+    // Example of chaining methods using 'this'
+    public InstanceMethods chainExample() {
+        System.out.println("Chaining instance method invoked on: " + this.name);
+        return this; // Returning the current instance
+    }
+
 }
