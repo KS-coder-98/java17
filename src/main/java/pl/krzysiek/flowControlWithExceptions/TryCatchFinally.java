@@ -69,7 +69,7 @@ import java.io.FileNotFoundException;
  */
 public class TryCatchFinally {
 
-    public static void tryCatchFinally() {
+    public static void main(String[] args) {
         try {
             try {
                 if (Math.random() > 0.5)
